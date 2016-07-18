@@ -38,22 +38,34 @@ describe('calculateSummary', function() {
       return calculateSummary(heimdall);
     })).to.eventually.deep.equal({
       totalTime: 500,
-      nodes: [{
-        name: 'merge-trees',
-        selfTime: 250,
-      }, {
-        name: 'merge-trees',
-        selfTime: 150,
-      }, {
-        name: 'babel',
-        selfTime: 100,
-      }],
-      groupedNodes: [{
+      nodes: [
+        {
+          name: 'merge-trees',
+          selfTime: 250,
+        },
+        {
+          name: 'merge-trees',
+          selfTime: 150,
+        },
+        {
+          name: 'babel',
+          selfTime: 100,
+        }
+      ],
+      groupedNodes: [
+        {
           name: 'merge-trees',
           count: 2,
           averageSelfTime: 200,
           totalSelfTime: 400,
-      }],
+        },
+        {
+          name: 'babel',
+          count: 1,
+          averageSelfTime: 100,
+          totalSelfTime: 100,
+        }
+      ],
     });
   });
 
@@ -82,14 +94,30 @@ describe('calculateSummary', function() {
       return calculateSummary(heimdall);
     })).to.eventually.deep.equal({
       totalTime: 500,
-      nodes: [{
-        name: 'merge-trees',
-        selfTime: 400,
-      }, {
-        name: 'babel',
-        selfTime: 100,
-      }],
-      groupedNodes: [],
+      nodes: [
+        {
+          name: 'merge-trees',
+          selfTime: 400,
+        },
+        {
+          name: 'babel',
+          selfTime: 100,
+        }
+      ],
+      groupedNodes: [
+        {
+          averageSelfTime: 400,
+          count: 1,
+          name: "merge-trees",
+          totalSelfTime: 400,
+        },
+        {
+          averageSelfTime: 100,
+          count: 1,
+          name: "babel",
+          totalSelfTime: 100,
+        }
+      ],
     });
   });
 });
